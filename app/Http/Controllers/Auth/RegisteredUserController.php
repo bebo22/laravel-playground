@@ -48,10 +48,8 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone ?? null,
             'password' => Hash::make($request->password),
         ]);
-
-        $user->sendEmailVerificationNotification();
      
-        // event(new Registered($user));
+        event(new Registered($user));
 
         // Auth::login($user);
 
