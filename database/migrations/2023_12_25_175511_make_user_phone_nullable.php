@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -13,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('first_name')->after('name')->required();
-            $table->string('last_name')->after('first_name')->required();
-            $table->string('phone')->after('email')->nullable();
+            $table->string('phone')->change()->nullable();
         });
     }
 
@@ -24,8 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['first_name', 'last_name', 'phone']);
-        });
+        //
     }
 };
