@@ -53,6 +53,16 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * Determine if the user has verified their email address.
+     *
+     * @return boolean
+     */
+    public function isEmailVerified(): bool
+    {
+        return Auth::user()->hasVerifiedEmail();
+    }
+
+    /**
      * Ensure the login request is not rate limited.
      *
      * @throws \Illuminate\Validation\ValidationException
