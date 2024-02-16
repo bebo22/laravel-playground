@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
         $rules = [
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
@@ -30,7 +30,7 @@ class LoginController extends Controller
 
         $user = auth()->user();
 
-        if (!$user->hasVerifiedEmail()) {
+        if (!$request->hasVerifiedEmail()) {
             return response()->json([
                 'message' => 'Email not verified'
             ], 403);
